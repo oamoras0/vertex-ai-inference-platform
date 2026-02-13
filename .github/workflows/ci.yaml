@@ -16,4 +16,4 @@ jobs:
           pip install -r src/api/requirements.txt
           pip install pytest httpx
       - name: Run Tests
-        run: pytest
+        run: PYTHONPATH=. pytest
