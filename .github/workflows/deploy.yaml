@@ -1,0 +1,49 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: 'your-gcp-project-id'
+  REGION: 'us-central1'
+  IMAGE: 'llm-api'
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Authenticate to Google Cloud (Workload Identity Federation is best practice)
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    # Setup GCloud SDK
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+
+    # Build and Push Docker Image
+    - name: 'Build and Push Container'
+      run: |
+        gcloud builds submit --tag gcr.io/$PROJECT_ID/$IMAGE:latest src/api/
+
+    # Setup Terraform
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    # Terraform Apply
+    - name: Terraform Init & Apply
+      working-directory: ./infrastructure/environments/prod
+      run: |
+        terraform init
+        terraform apply -auto-approve
