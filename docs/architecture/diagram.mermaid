@@ -1,5 +1,5 @@
 ```mermaid
-flowchart TD
+graph TD
     User[Client App] -->|HTTPS| GLB[Cloud Load Balancing]
     GLB -->|Secure Access| APIG[API Gateway / Cloud Endpoints]
     
@@ -19,4 +19,5 @@ flowchart TD
         PubSub -->|Stream| BQ[(BigQuery)]
         CR -.->|Metrics| CloudMon[Cloud Monitoring]
     end
+
 ```
