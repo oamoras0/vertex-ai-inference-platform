@@ -47,7 +47,7 @@ async def predict(request: Request):
         # Log structured data for Observability (Cloud Logging)
         logger.info({
             "event": "inference_success",
-            "latency_ms": round(duration * 1000, 2),
+            "latency_ms": round(duration - 1000, 2),
             "input_chars": len(prompt),
             "model_version": response.model_version_id
         })

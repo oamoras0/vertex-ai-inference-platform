@@ -1,0 +1,21 @@
+```mermaid
+graph TD
+    User[Client App] -->|HTTPS| GLB[Cloud Load Balancing]
+    GLB -->|Secure Access| APIG[API Gateway / Cloud Endpoints]
+    
+    subgraph "Orchestration Layer"
+        APIG -->|Request| CR[Cloud Run Service]
+        CR -->|Read/Write| Redis[(Cloud Memorystore)]
+        CR -->|Secrets| SM[Secret Manager]
+    end
+
+    subgraph "Inference Layer (Vertex AI)"
+        CR -->|Predict| V_End[Vertex AI Endpoint]
+        V_End -->|Serve| V_Mod[Model Registry]
+    end
+
+    subgraph "Data & Ops"
+        CR -->|Async Logs| PubSub[Cloud Pub/Sub]
+        PubSub -->|Stream| BQ[(BigQuery)]
+        CR -.->|Metrics| CloudMon[Cloud Monitoring]
+    end
