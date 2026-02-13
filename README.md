@@ -1,4 +1,3 @@
-```markdown
 # Production-Ready LLM Inference Pipeline on GCP
 
 ![GCP](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
@@ -6,7 +5,6 @@
 ![Vertex AI](https://img.shields.io/badge/Vertex_AI-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![CI/CD](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
-
 > **Enterprise-grade LLM operations platform** designed for high availability, security, and cost-effective inference at scale using Google Cloud Vertex AI and Cloud Run.
 
 ---
