@@ -1,7 +1,3 @@
-Here is a professional, high-impact `README.md` template designed to showcase your architectural and DevOps skills. You can copy and paste this directly into your repository.
-
----
-
 ```markdown
 # Production-Ready LLM Inference Pipeline on GCP
 
